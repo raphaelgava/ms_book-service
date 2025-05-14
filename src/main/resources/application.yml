@@ -1,0 +1,39 @@
+spring:
+  application:
+    name: ms_book-service
+
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/book_service?createDatabaseIfNotExist=true&useSSL=false&useTimezone=true&serverTimezone=UTC
+    username: root
+    password: admin123
+
+  #O erro SerializationFeature.FAIL_ON_EMPTY_BEANS ocorre no Jackson, uma biblioteca popular para serialização e desserialização de objetos em Java, quando você tenta serializar um objeto que não contém propriedades ou campos que possam ser convertidos em JSON
+  jackson:
+    #ALWAYS: Inclui todas as propriedades, independentemente do seu valor.
+    #NON_NULL: Inclui apenas as propriedades que não são nulas.
+    #NON_EMPTY: Inclui propriedades que não são nulas e não são vazias (por exemplo, listas ou strings vazias).
+    #NON_ABSENT: Inclui propriedades que não são nulas e não são ausentes (aplicável a Optional).
+    #USE_DEFAULTS: Usa as configurações padrão do Jackson.
+    default-property-inclusion: NON_NULL
+    serialization:
+      #true: O Jackson lançará uma exceção (JsonMappingException) se tentar serializar um objeto que não contém propriedades. Isso é útil para identificar problemas com objetos que não estão devidamente configurados.
+      #false: O Jackson não lançará uma exceção e simplesmente serializará o objeto vazio como um JSON vazio ({}).
+      fail-on-empty-beans: false
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQLDialect
+
+  flyway:
+    url: jdbc:mysql://localhost:3306
+    schemas: book_service
+    user: root
+    password: admin123
+
+server:
+  port: 8100
