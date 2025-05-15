@@ -8,17 +8,17 @@ spring:
     username: root
     password: admin123
 
-  #O erro SerializationFeature.FAIL_ON_EMPTY_BEANS ocorre no Jackson, uma biblioteca popular para serialização e desserialização de objetos em Java, quando você tenta serializar um objeto que não contém propriedades ou campos que possam ser convertidos em JSON
+  #O erro SerializationFeature.FAIL_ON_EMPTY_BEANS ocorre no Jackson, uma biblioteca popular para serializaï¿½ï¿½o e desserializaï¿½ï¿½o de objetos em Java, quando vocï¿½ tenta serializar um objeto que nï¿½o contï¿½m propriedades ou campos que possam ser convertidos em JSON
   jackson:
     #ALWAYS: Inclui todas as propriedades, independentemente do seu valor.
-    #NON_NULL: Inclui apenas as propriedades que não são nulas.
-    #NON_EMPTY: Inclui propriedades que não são nulas e não são vazias (por exemplo, listas ou strings vazias).
-    #NON_ABSENT: Inclui propriedades que não são nulas e não são ausentes (aplicável a Optional).
-    #USE_DEFAULTS: Usa as configurações padrão do Jackson.
+    #NON_NULL: Inclui apenas as propriedades que nï¿½o sï¿½o nulas.
+    #NON_EMPTY: Inclui propriedades que nï¿½o sï¿½o nulas e nï¿½o sï¿½o vazias (por exemplo, listas ou strings vazias).
+    #NON_ABSENT: Inclui propriedades que nï¿½o sï¿½o nulas e nï¿½o sï¿½o ausentes (aplicï¿½vel a Optional).
+    #USE_DEFAULTS: Usa as configuraï¿½ï¿½es padrï¿½o do Jackson.
     default-property-inclusion: NON_NULL
     serialization:
-      #true: O Jackson lançará uma exceção (JsonMappingException) se tentar serializar um objeto que não contém propriedades. Isso é útil para identificar problemas com objetos que não estão devidamente configurados.
-      #false: O Jackson não lançará uma exceção e simplesmente serializará o objeto vazio como um JSON vazio ({}).
+      #true: O Jackson lanï¿½arï¿½ uma exceï¿½ï¿½o (JsonMappingException) se tentar serializar um objeto que nï¿½o contï¿½m propriedades. Isso ï¿½ ï¿½til para identificar problemas com objetos que nï¿½o estï¿½o devidamente configurados.
+      #false: O Jackson nï¿½o lanï¿½arï¿½ uma exceï¿½ï¿½o e simplesmente serializarï¿½ o objeto vazio como um JSON vazio ({}).
       fail-on-empty-beans: false
 
   jpa:
@@ -37,3 +37,8 @@ spring:
 
 server:
   port: 8100
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka #endereÃ§o do eureka
