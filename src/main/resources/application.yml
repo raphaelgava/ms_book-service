@@ -43,3 +43,17 @@ eureka:
   client:
     service-url:
       defaultZone: http://localhost:8761/eureka #endereço do eureka
+  #A configuração abaixo é para evitar o erro:
+  #  2025-05-16T01:08:05.866-03:00 ERROR 3928 --- [api-gateway] [ctor-http-nio-3] a.w.r.e.AbstractErrorWebExceptionHandler: [ 2cd29eb8-1 ]  500 Server Error for HTTP GET "/MS-CAMBIO-SERVICE/cambio-service/7.87/USD/BRL"
+  #
+  #  java.net.UnknownHostException: Failed to resolve 'Raphael-PC.mshome.net' [A(1), AAAA(28)] after 2 queries
+  #    at io.netty.resolver.dns.DnsResolveContext.finishResolve(DnsResolveContext.java:1150) ~[netty-resolver-dns-4.1.119.Final.jar:4.1.119.Final]
+  #    Suppressed:
+  #      reactor.core.publisher.FluxOnAssembly$OnAssemblyException:
+  #  Error has been observed at the following site(s):
+  #    *__checkpoint ⇢ org.springframework.cloud.gateway.filter.WeightCalculatorWebFilter [DefaultWebFilterChain]
+  #      *__checkpoint ⇢ HTTP GET "/MS-CAMBIO-SERVICE/cambio-service/7.87/USD/BRL" [ExceptionHandlingWebHandler]
+  #Essa configuração vai alterar o XML de configuração do eureka conforme a imagem ErroFaltaInstanceHostanmeMS.png.
+  #Outra opção é gerar a configuração no arquivo C:\Windows\System32\drivers\etc\hosts apontando Raphael-PC.mshome.net para localhost
+  instance:
+    hostname: localhost #Raphael-PC.mshome.net
