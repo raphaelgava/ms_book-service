@@ -1,6 +1,7 @@
 spring:
   application:
-    name: ms_book-service
+    #nome aqui não pode ter caracteres tipo _ para que o Feign não se perca. O mesmo nome que está aqui é o que vai aparecer no eureka
+    name: ms-book-service
 
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
