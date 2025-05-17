@@ -76,3 +76,10 @@ resilience4j:
         enable-exponential-backoff: true #aumenta o tempo de espera exponencialmente
       default:
         max-attempts: 2
+
+springdoc:
+  show-actuator: true
+  api-docs:
+    path: book-service/v3/api-docs
+#  swagger-ui:
+#    path: /swagger-ui.html
