@@ -49,6 +49,7 @@
 <!--			<groupId>org.springframework.cloud</groupId>-->
 <!--			<artifactId>spring-cloud-starter-config</artifactId>-->
 <!--		</dependency>-->
+		<!-- Começo Openfeign + Eureka -->
 		<dependency>
 			<groupId>org.springframework.cloud</groupId> <!-- já tem o load balancer -->
 			<artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
@@ -57,6 +58,18 @@
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-openfeign</artifactId>
 		</dependency>
+		<!-- Fim Openfeign + Eureka -->
+		<!-- Começo resilience4j -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-aop</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>io.github.resilience4j</groupId>
+			<artifactId>resilience4j-spring-boot2</artifactId>
+		</dependency>
+		<!-- Fim resilience4j -->
+		<!-- Começo bd -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
@@ -77,6 +90,22 @@
 			<groupId>org.flywaydb</groupId>
 			<artifactId>flyway-mysql</artifactId>
 		</dependency>
+		<!-- Fim bd -->
+		<!-- Começo Swagger -->
+		<dependency>
+			<groupId>org.springdoc</groupId> <!-- http://localhost:8101/v3/api-docs -->
+				<!-- Se usar essa versão dá erro de incompactibilidade com o webmvc-ui -->
+<!--			<artifactId>springdoc-openapi-webmvc-core</artifactId>-->
+<!--			<version>1.8.0</version>-->
+			<artifactId>springdoc-openapi-starter-common</artifactId>
+			<version>2.8.8</version> <!-- Dá erro se não colocar a versão pois o springboot não gerencia por padrão! -->
+		</dependency>
+		<dependency>
+			<groupId>org.springdoc</groupId> <!-- http://localhost:8101/swagger-ui.html -->
+			<artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+			<version>2.8.8</version><!-- Dá erro se não colocar a versão pois o springboot não gerencia por padrão! -->
+		</dependency>
+		<!-- Fim Swagger -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>

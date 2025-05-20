@@ -57,3 +57,29 @@ eureka:
   #Outra opção é gerar a configuração no arquivo C:\Windows\System32\drivers\etc\hosts apontando Raphael-PC.mshome.net para localhost
   instance:
     hostname: localhost #Raphael-PC.mshome.net
+
+resilience4j:
+  bulkhead:
+    instances:
+      default:
+        max-concurrent-calls: 10
+  ratelimiter:
+    instances:
+      foo-rate:
+        limit-for-period: 2 # duas requisições
+        limit-refresh-period: 10s # a cada 10s
+  retry:
+    instances:
+      foo-bar-retry:
+        max-attempts: 5
+        wait-duration: 1s
+        enable-exponential-backoff: true #aumenta o tempo de espera exponencialmente
+      default:
+        max-attempts: 2
+
+springdoc:
+  show-actuator: true
+  api-docs:
+    path: book-service/v3/api-docs
+#  swagger-ui:
+#    path: /swagger-ui.html
