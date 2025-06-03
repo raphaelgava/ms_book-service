@@ -4,11 +4,13 @@
 # ENTRYPOINT ["java","-jar","/app.jar"]
 FROM openjdk:21
 ARG JAR_FILE=ms_book-service/target/*.jar
-ARG JAR_FILE_URL=components/ms_book-service/target/*.jar
+ARG JAR_FILE_URL=./components/ms_book-service/target/*.jar
 #COPY ${JAR_FILE} app.jar
 RUN if [ -f ${JAR_FILE} ]; then \
+        echo ${JAR_FILE} \
         cp ${JAR_FILE} app.jar; \
     else \
+        echo ${JAR_FILE_URL} \
         cp ${JAR_FILE_URL} app.jar; \
     fi
 RUN bash -c 'touch /app.jar'
