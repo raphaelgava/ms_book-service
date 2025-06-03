@@ -31,10 +31,22 @@ spring:
         dialect: org.hibernate.dialect.MySQLDialect
 
   flyway:
-    url: jdbc:mysql://localhost:3306
-    schemas: book_service
+    url: jdbc:mysql://localhost:3306/book_service?createDatabaseIfNotExist=true&useSSL=false&useTimezone=true&serverTimezone=UTC
+#    url: jdbc:mysql://localhost:3306
+#    schemas: book_service
     user: root
     password: admin123
+
+management:
+  tracing:
+    sampling: # definindo % das amostras
+      probability: 1 #5% quando for pra produção
+  #Para evitar o erro:
+  #2025-05-28T18:14:48.603-03:00 WARN 1 --- [ms-book-service] [/api/v2/spans}}] [ ] z.r.i.AsyncReporter$BoundedAsyncReporter : Spans were dropped due to exceptions. All subsequent errors will be logged at FINE level.
+  #2025-05-28T18:14:48.603-03:00 WARN 1 --- [ms-book-service] [/api/v2/spans}}] [ ] z.r.i.AsyncReporter$BoundedAsyncReporter : Dropped 2 spans due to ResourceAccessException(I/O error on POST request for "http://localhost:9411/api/v2/spans": Connect to http://localhost:9411⁠ [localhost/127.0.0.1, localhost/0:0:0:0:0:0:0:1] failed: Connection refused)
+  zipkin:
+    tracing:
+      endpoint: ${SPRING_ZIPKIN_BASEURL:http://localhost:9411/}api/v2/spans
 
 server:
   port: 8100
@@ -56,7 +68,10 @@ eureka:
   #Essa configuração vai alterar o XML de configuração do eureka conforme a imagem ErroFaltaInstanceHostanmeMS.png.
   #Outra opção é gerar a configuração no arquivo C:\Windows\System32\drivers\etc\hosts apontando Raphael-PC.mshome.net para localhost
   instance:
-    hostname: localhost #Raphael-PC.mshome.net
+    #hostname: localhost #Raphael-PC.mshome.net
+    prefer-ip-address: true
+    hostname: ${HOSTNAME:localhost}
+    instance-id: ${spring.application.name}:${HOSTNAME:localhost}:${server.port}
 
 resilience4j:
   bulkhead:
@@ -80,6 +95,10 @@ resilience4j:
 springdoc:
   show-actuator: true
   api-docs:
-    path: book-service/v3/api-docs
+    path: /book-service/v3/api-docs
 #  swagger-ui:
 #    path: /swagger-ui.html
+
+logging:
+  level:
+    org.springdoc: DEBUG
